@@ -1,13 +1,1 @@
-{
-  "env": {
-    "default": {
-      "db": "http://user:password@127.0.0.1:5984/development"
-    },
-    "staging": {
-      "db": "http://user:password@127.0.0.1:5984/staging"
-    },
-    "production": {
-      "db": "http://user:password@127.0.0.1:5984/production"
-    }
-  }
-}
+{"env":{"staging":{"db":"http:\/\/user:password@127.0.0.1:5984\/staging"},"default":{"db":"http:\/\/couchdb:couchdb@127.0.0.1:5984\/development"},"production":{"db":"http:\/\/user:password@127.0.0.1:5984\/production"}}}
