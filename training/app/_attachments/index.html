@@ -1,29 +1,59 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>My New CouchApp</title>
+    <title>My Albums</title>
     <link rel="stylesheet" href="style/main.css" type="text/css">
+    <link rel="stylesheet" href="style/jquery.mobile-1.0a2.css" type="text/css"/>
   </head>
   <body>
-    <div id="account"></div>
-
-    <h1>Generated CouchApp</h1>
-
-    <div id="profile"></div>
-    <div id="items"></div>
-
-    <div id="sidebar">
-      <p>Edit welcome message.</p>
-      <p>Ideas: You could easily turn this into a photo sharing app, or a grocery list, or a chat room.</p>
-    </div>
+    <div data-role="page">
+          <div data-role="header"><h2>Albums</h2></div>
+          <div data-role="content">
+              <ul id="albums" data-role="listview" data-theme="c" data-dividertheme="b" ></ul>
+          </div>
+          <div data-role="footer">Footer</div>
+      </div>
   </body>
   <script src="vendor/couchapp/loader.js"></script>
   <script type="text/javascript" charset="utf-8">
-    $.couch.app(function(app) {
-      $("#account").evently("account", app);
-      $("#profile").evently("profile", app);
-      $.evently.connect("#account","#profile", ["loggedIn","loggedOut"]);
-      $("#items").evently("items", app);
-    });
+ 
+      $db = $.couch.db("albums");
+ 
+      function handleDocumentReady()
+      {
+          refreshAlbums();
+      }
+ 
+      function refreshAlbums()
+      {
+          $("#albums").empty();
+          $db.view("albums/albums",
+            { success: function( data ) {
+                    var i;
+                    var album;
+                    var artist;
+                    var title;
+                    var description;
+                    var listItem;
+                    for( i in data.rows )
+                    {
+                        album = data.rows[i].value;
+                        artist = album.artist;
+                        title = album.title;
+                        description = album.description;
+                        listItem = "<li>" +
+                                    "<h2 class=\"artist\">gt;" + artist + "<\/h2>" +
+                                    "<p class=\"title\">gt;" + title + "<\/p>" +
+                                    "<p class=\"description\">gt;" + description + "<\/p>";
+                        $("#albums").append( listItem );
+                    }
+                    $("#albums").listview( "refresh" );
+                }
+            });
+      }
+ 
+      $(document).ready( handleDocumentReady );
+ 
   </script>
 </html>
+
