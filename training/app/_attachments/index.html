@@ -36,16 +36,21 @@
                     var title;
                     var description;
                     var listItem;
+                    var externalPage;
                     for( i in data.rows )
                     {
                         album = data.rows[i].value;
                         artist = album.artist;
                         title = album.title;
                         description = album.description;
-                        listItem = "<li>" +
-                                    "<h2 class=\"artist\">" + artist + "<\/h2>" +
-                                    "<p class=\"title\">" + title + "<\/p>" +
-                                    "<p class=\"description\">" + description + "<\/p>";
+                        externalPage = "_show/album/" + album._id;
+                        listItem = "<li class=\"album\">" +
+                                            "<a href=\"" + externalPage + "\">" +
+                                                "<h2 class=\"artist\">" + artist + "<\/h2>" +
+                                            "<\/a>" +
+                                            "<p class=\"title\">" + title + "<\/p>" +
+                                            "<p class=\"description\">" + description + "<\/p>";
+                                        "<\/li>";
                         $("#albums").append( listItem );
                     }
                     $("#albums").listview( "refresh" );
