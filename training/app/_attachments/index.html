@@ -21,7 +21,8 @@
  
       function handleDocumentReady()
       {
-          refreshAlbums();
+    	  $("#home").bind( "pagebeforeshow", refreshAlbums );  
+    	  refreshAlbums();
       }
  
       function refreshAlbums()

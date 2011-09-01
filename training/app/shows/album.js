@@ -6,5 +6,5 @@ function(doc, req) {
         description: doc.description,
         document: doc._id
     };
-    return Mustache.to_html(this.templates.album, stash);
+    return Mustache.to_html(this.templates.album, stash, this.templates.partials.album);
 }
