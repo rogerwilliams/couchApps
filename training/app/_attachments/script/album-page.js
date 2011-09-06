@@ -2,10 +2,22 @@ var AlbumPageController = function() {
  
     function handleView()
     {
-        // Watch for bound hide of page to clear from cache.
+    	$("#editbutton").live( "click", handleEdit );
+    	// Watch for bound hide of page to clear from cache.
         var docId = $("#albumcontent").data("identity");
         var albumPage = $(document.getElementById("_show/album/" + docId));
         albumPage.bind( "pagehide", handlePageViewHide );
+    }
+    
+    function handleEdit( event )
+    {
+        // Prevent default link event.
+        event.preventDefault();
+        // Access document id from data-identity.
+        var docId = $("#albumcontent").data("identity");
+        // Change page.
+        $.mobile.changePage( "_show/album-edit/" + docId, "slide", false, true );
+        return false;
     }
  
     function handlePageViewHide()
