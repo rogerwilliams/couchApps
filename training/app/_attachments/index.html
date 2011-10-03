@@ -50,6 +50,27 @@
       </div>
   </body>
   <script src="vendor/couchapp/loader.js"></script>
+  <script id="loginSignupDialog" type="text/x-jquery-tmpl">
+    <div role="dialog" data-backbtn="false" class="ui-dialog ui-body-a">
+      <div class="ui-header ui-bar-a ui-corner-top ui-overlay-shadow">
+    <h1 class="ui-title"></h1>
+    <a id="dialogCloseButton" href="#" data-icon="delete" data-iconpos="notext" style="left: 15px; top: .4em; position: absolute;" />
+      </div>
+      <div data-role="content" class="ui-body-c ui-corner-bottom ui-overlay-shadow">
+        <p>You need to be logged in to do that!</p>
+        <form action="#" method="post">
+          <label for="username">Username:</label>
+          <input type="text" name="username" id="username" value=""  />
+          <label for="password">Password:</label>
+          <input type="password" name="password" id="password" value="" />
+          <a id="submitButton" href="#" type="submit" data-role="button" data-theme="b">Submit</a>
+          <hr/>
+          <a id="optionLinkButton" href="#" />
+        </form>
+      </div>
+      <div data-role="footer" />
+    </div>
+	</script>
   <script type="text/javascript" charset="utf-8">
  
       $db = $.couch.db("albums");
@@ -58,6 +79,12 @@
       {
           $("#home").bind( "pagebeforeshow", refreshAlbums );
           refreshAlbums();
+          
+       // Set database reference and dialog template on albums.
+          $.extend( $.albums, {
+              database: $db,
+              dialog:  $("#loginSignupDialog").tmpl()
+          });
  
           $("#addSubmitButton").live( "click", function( event ) {
               event.preventDefault();
@@ -66,7 +93,7 @@
               document.title = $("input#addTitleField").val();
               document.description = $("textarea#addDescriptionField").val();
               document.creation_date = ( new Date() ).getTime();
-              $db.saveDoc( document, {
+              $.albums.saveDocument( document, {
                       success: function() {
                           $.mobile.changePage( "#home", "slidedown", true, true );
                       },

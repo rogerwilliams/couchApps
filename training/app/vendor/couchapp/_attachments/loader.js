@@ -14,5 +14,9 @@ couchapp_load([
                "vendor/couchapp/jquery.couch.app.util.js",
                "vendor/couchapp/jquery.mustache.js",
                "vendor/couchapp/jquery.evently.js",
-               "vendor/couchapp/jquery.mobile-1.0a2.js"
+               "vendor/couchapp/jquery.mobile-1.0a2.js",
+               "vendor/couchapp/jquery.tmpl.js",
+               "script/command_queue.js",
+               "script/jquery.albums.app.js",
+               "script/jquery.albums.loginDialog.js"
 ]);

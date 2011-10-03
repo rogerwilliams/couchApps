@@ -37,7 +37,7 @@ var AlbumDeleteDialogController = function() {
         $db.openDoc( docId, {
             success: function( document ) {
                 // Then use the opened doc as reference to remove.
-                $db.removeDoc( document, {
+            	 $.albums.deleteDocument( document, {
                     success: function() {
                         $.mobile.changePage( "#home", "slide", true, true );
                     },

@@ -41,7 +41,7 @@ var AlbumEditPageController = function() {
  
     function saveDocument( document )
     {
-        $db.saveDoc( document, {
+    	$.albums.saveDocument( document, {
             success: function( response )  {
                 updateEditableAlbum( document );
                 navigateToAlbumPage( document._id );
